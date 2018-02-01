@@ -13,12 +13,12 @@ const portfinder = require('portfinder')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
-const express = require('express')
-const app = express()
+// const express = require('express')
+// const app = express()
 const appData = require(`../data.json`)
 const {seller,goods,ratings} = appData
-const apiRoutes = express.Router()
-app.use('/api',apiRoutes)
+// const apiRoutes = express.Router()
+// app.use('/api',apiRoutes)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -29,27 +29,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
-    clientLogLevel: 'warning',
-    historyApiFallback: {
-      rewrites: [
-        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
-      ],
-    },
-    hot: true,
-    contentBase: false, // since we use CopyWebpackPlugin.
-    compress: true,
-    host: HOST || config.dev.host,
-    port: PORT || config.dev.port,
-    open: config.dev.autoOpenBrowser,
-    overlay: config.dev.errorOverlay
-      ? { warnings: false, errors: true }
-      : false,
-    publicPath: config.dev.assetsPublicPath,
-    proxy: config.dev.proxyTable,
-    quiet: true, // necessary for FriendlyErrorsPlugin
-    watchOptions: {
-      poll: config.dev.poll,
-    },
     before(app) {
       app.get('/api/seller', (req, res) => {
         res.json({
@@ -72,6 +51,27 @@ const devWebpackConfig = merge(baseWebpackConfig, {
             data: ratings
           })
         })
+    },
+    clientLogLevel: 'warning',
+    historyApiFallback: {
+      rewrites: [
+        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
+      ],
+    },
+    hot: true,
+    contentBase: false, // since we use CopyWebpackPlugin.
+    compress: true,
+    host: HOST || config.dev.host,
+    port: PORT || config.dev.port,
+    open: config.dev.autoOpenBrowser,
+    overlay: config.dev.errorOverlay
+      ? { warnings: false, errors: true }
+      : false,
+    publicPath: config.dev.assetsPublicPath,
+    proxy: config.dev.proxyTable,
+    quiet: true, // necessary for FriendlyErrorsPlugin
+    watchOptions: {
+      poll: config.dev.poll,
     }
   },
   plugins: [
