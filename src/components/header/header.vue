@@ -7,17 +7,17 @@
       <div class="seller-content">
         <div class="title">
           <span class="brand"></span>
-          <span class="seller-name"></span>
+          <span class="seller-name">{{seller.name}}</span>
         </div>
         <p class="delivery">{{seller.description}}/{{seller.deliveryTime}}分钟送达</p>
         <div v-if="seller.supports" class="supports">
-          <span class="supports-icon" :class="seller.supports[0].type"></span>
+          <span class="supports-icon" :class="classMap[seller.supports[0].type]"></span>
           <span class="supports-text">{{seller.supports[0].description}}</span>
         </div>
       </div>
       <div v-if="seller.supports" class="support-more-btn">
         <span class="support-num">{{seller.supports.length}}个</span>
-        <i class="keyboard_arrow_right"></i>
+        <i class="icon-keyboard_arrow_right"></i>
       </div>
     </div>
     <div class="bulletin-wrapper"></div>
@@ -27,10 +27,18 @@
 <script>
   export default {
     name: 'v-header',
+    data () {
+      return {
+        classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee']
+      }
+    },
     props: {
       seller: {
         type: Object
       }
+    },
+    created () {
+      // this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
     }
   }
 </script>
@@ -38,10 +46,11 @@
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixin.styl"
   .header
+    color #fff
     background-color rgba(7, 17, 27, .5)
-    filter blur(10px)
     .content-wrapper
-      padding 24px 12px 18 24
+      position relative
+      padding 24px 12px 18px 24px
       font-size 0
       .avatar
         display inline-block
@@ -52,8 +61,90 @@
         display inline-block
         padding-left 16px
         .title
-          padding-top 4px
+          padding-top 2px
+          font-size 0
           .brand
+            display inline-block
+            vertical-align top
+            width 30px
+            height 18px
             bg-img('brand')
+            background-size 30px 18px
+          .seller-name
+            padding-left 6px
+            line-height 18px
+            font-size 16px
+            font-weight bold
+        .delivery
+          margin-top 8px
+          line-height 12px
+          font-size 12px
+        /*font-weight 200*/
+        .supports
+          /*display: -webkit-box;*/
+          /*display: box;*/
+          /*display: -webkit-flex;*/
+          /*display: flex;*/
+          /*-webkit-box-align: center;*/
+          /*box-align: center;*/
+          /*-webkit-align-items: center;*/
+          /*align-items: center;*/
+          /*display table*/
+          margin 10px 0 2px 0
+          height 12px
+          /*line-height 12px*/
+          font-size 0
+          .supports-icon
+            /*display table-cell*/
+            /*vertical-align middle*/
+            display inline-block
+            vertical-align top
+            width 12px
+            height 12px
+            background-size 12px 12px
+            &.decrease
+              bg-img('decrease_1')
+            &.discount
+              bg-img('discount_1')
+            &.guarantee
+              bg-img('guarantee_1')
+            &.invoice
+              bg-img('invoice_1')
+            &.special
+              bg-img('special_1')
+          .supports-text
+            box-sizing border-box
+            display inline-block
+            /*display table-cell*/
+            /*vertical-align middle*/
+            margin-left 4px
+            /*height 12px*/
+            /*line-height 12px*/
+            /*font-size 10px*/
+            /*font-weight 200*/
+            /*border-top 1px solid transparent*/
+            line-height 24px
+            font-size: 20px;
+            transform: scale(0.5);
+            transform-origin: 0% 0%;
+      .support-more-btn
+        position absolute
+        right 12px
+        bottom 15px
+        padding 0 8px
+        height 24px
+        line-height 24px
+        font-size 0
+        border-radius 14px
+        background-color rgba(0, 0, 0, .2)
+        .support-num
+          line-height 24px
+          font-size 10px
+        /*font-weight 200*/
+        .icon-keyboard_arrow_right
+          margin-left 2px
+          line-height 24px
+          font-size 10px
 
+  /*asd*/
 </style>
