@@ -14,3 +14,9 @@ bg-img($url)
   background-repeat no-repeat
   @media (-webkit-min-device-pixel-ratio: 3 ),(min-device-pixel-ratio: 3)
     background-image url($url + '@3x.png')
+
+fontSize-xs($fontSize, $lineHeight)
+  font-size $fontSize* 2px
+  line-height $lineHeight* 2px
+  transform: scale(0.5);
+  transform-origin: 0% 0%;

@@ -20,7 +20,10 @@
         <i class="icon-keyboard_arrow_right"></i>
       </div>
     </div>
-    <div class="bulletin-wrapper"></div>
+    <div class="bulletin-wrapper">
+      <span class="bulletin-icon"></span><span class="bulletin-preview">{{seller.bulletin}}</span>
+      <i class="icon-keyboard_arrow_right"></i>
+    </div>
   </div>
 </template>
 
@@ -135,9 +138,12 @@
         height 24px
         line-height 24px
         font-size 0
-        border-radius 14px
+        /*transform: scale(0.5);*/
+        /*transform-origin: 0% 0%;*/
         background-color rgba(0, 0, 0, .2)
+        border-radius 14px
         .support-num
+          /*border-top 1px solid transparent*/
           line-height 24px
           font-size 10px
         /*font-weight 200*/
@@ -145,6 +151,37 @@
           margin-left 2px
           line-height 24px
           font-size 10px
+    .bulletin-wrapper
+      position relative
+      /*box-sizing border-box*/
+      padding 0 28px 0 12px
+      height 28px
+      line-height 28px
+      /*font-size 0*/
+      white-space nowrap
+      overflow hidden
+      text-overflow ellipsis
+      background-color rgba(7, 17, 27, .2)
+      .bulletin-icon
+        display inline-block
+        vertical-align top
+        margin-top 8px
+        margin-right 4px
+        width 22px
+        height 12px
+        background-size 22px 12px
+        bg-img('bulletin')
+      .bulletin-preview
+        /*display inline-block*/
+        vertical-align: top;
+        /*width calc((100% - 22px)*2)
+        fontSize-xs(10,28)*/
+        font-size 10px
+      .icon-keyboard_arrow_right
+        position absolute
+        right 10px
+        line-height 28px
+        font-size 10px
 
   /*asd*/
 </style>
