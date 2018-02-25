@@ -24,6 +24,9 @@
       <span class="bulletin-icon"></span><span class="bulletin-preview">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
     </div>
+    <div class="header-bg">
+      <img width="100%" height="100%" :src="seller.avatar">
+    </div>
   </div>
 </template>
 
@@ -49,7 +52,9 @@
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixin.styl"
   .header
+    position relative
     color #fff
+    overflow hidden
     background-color rgba(7, 17, 27, .5)
     .content-wrapper
       position relative
@@ -154,7 +159,7 @@
     .bulletin-wrapper
       position relative
       /*box-sizing border-box*/
-      padding 0 28px 0 12px
+      padding 0 22px 0 12px
       height 28px
       line-height 28px
       /*font-size 0*/
@@ -172,16 +177,31 @@
         background-size 22px 12px
         bg-img('bulletin')
       .bulletin-preview
-        /*display inline-block*/
+        box-sizing border-box
+        display inline-block
+        margin-top 10px
         vertical-align: top;
-        /*width calc((100% - 22px)*2)
-        fontSize-xs(10,28)*/
+        width calc(100% - 26px)
+        height 12px
         font-size 10px
+        line-height 12px
+        overflow hidden
+        text-overflow ellipsis
       .icon-keyboard_arrow_right
         position absolute
         right 10px
         line-height 28px
         font-size 10px
 
+    .header-bg
+      position absolute
+      z-index -1
+      top 0
+      width 100%
+      height 100%
+      filter blur(5px)
+      background-color rgba(7, 17, 27, .5)
+      background-size contain
+      background-repeat no-repeat
   /*asd*/
 </style>
