@@ -27,6 +27,16 @@
     <div class="header-bg">
       <img width="100%" height="100%" :src="seller.avatar">
     </div>
+    <transition name="header-detail">
+      <div class="header-detail" v-show="detailIsShow">
+        <div class="detail-wrapper">
+          <h1 class="detail-name">{{seller.name}}</h1>
+        </div>
+        <div class="detail-footer">
+          <i class="icon-close detail-close-btn"></i>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -35,12 +45,21 @@
     name: 'v-header',
     data () {
       return {
-        classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee']
+        classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
+        detailIsShow: true
       }
     },
     props: {
       seller: {
         type: Object
+      }
+    },
+    methods: {
+      detailShow () {
+        this.detailIsShow = true
+      },
+      detailHide () {
+        this.detailIsShow = false
       }
     },
     created () {
@@ -192,7 +211,6 @@
         right 10px
         line-height 28px
         font-size 10px
-
     .header-bg
       position absolute
       z-index -1
@@ -203,5 +221,35 @@
       background-color rgba(7, 17, 27, .5)
       background-size contain
       background-repeat no-repeat
+    .header-detail
+      position fixed
+      top 0
+      left 0
+      z-index 10
+      width 100%
+      height 100%
+      background-color rgba(7, 17, 27, .8)
+      backdrop-filter blur(10px)
+      -webkit-backdrop-filter blur(10px)
+      .detail-wrapper
+        box-sizing border-box
+        width 100%
+        min-height 100%
+        padding 64px 0
+        .detail-name
+          line-height 16px
+          font-size 16px
+          font-weight 700
+          text-align center
+          color rgb(255, 255, 255)
+      .detail-footer
+        margin-top -64px
+        .detail-close-btn
+          display block
+          width 100%
+          text-align center
+          font-size 32px
+          line-height 32px
+          color rgba(255, 255, 255, .5)
   /*asd*/
 </style>
